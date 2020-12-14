@@ -1,0 +1,187 @@
+<div class="listing">
+    <div class="l-input">
+        <label>Nhập link AMZ:</label>
+        <input type="text" [(ngModel)]="linkAmz">
+        <button (click)="getDataAmz()">GET</button>
+        <button (click)="reset()">RESET</button>
+    </div>
+    <div class="l-custom">
+        <label>Nhập Title:</label>
+        <input style="width: 70%;" type="text" [(ngModel)]="titleProduct">
+    </div>
+    <div class="l-custom" style="display: flex;">
+        <div style="width: 50%;padding: 10px">
+            <label>Nhập Specifications:</label>
+            <input style="width: 70%;" type="text" [(ngModel)]="specification" (keyup.enter)="onEnterSpec()">
+            <div style="padding-left: 20px;">
+                <p *ngFor="let s of specifications;let i = index" style="margin: 0;"> {{s }} <span style="padding-left: 20px;color: blue;" (click)="remove(i,0)">xóa</span></p>
+            </div>
+        </div>
+        <div style="width: 50%;padding: 10px">
+            <label>Nhập package:</label>
+            <input style="width: 70%;" type="text" [(ngModel)]="packageInclude" (keyup.enter)="onEnterPackage()">
+            <div style="padding-left: 20px;">
+                <p *ngFor="let s of packageIncludes;let i = index" style="margin: 0;"> {{s }} <span style="padding-left: 20px;color: blue;" (click)="remove(i,1)">xóa</span></p>
+            </div>
+        </div>
+    </div>
+    <div class="l-custom">
+        <label>Nhập link user / store:</label>
+        <input type="text" [(ngModel)]="shopName" placeholder="Link click More product">
+        <button (click)="copyHtml()">COPY DESCRIPTION</button>
+    </div>
+    <div class="l-view" #templateHTML>
+        <html>
+
+        <head>
+            <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Cairo|Saira+Semi+Condensed:400,700|Ubuntu"
+                rel="stylesheet">
+            <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+            <link href="https://file-sever-assets.herokuapp.com/shop.css" rel="stylesheet">
+        </head>
+
+        <body style="font-family: 'Recursive';width: 1100px;margin: 0 auto;">
+            <div _ngcontent-ycr-c47="" class="header"
+                style="display: flex; align-items: center; height: 250px; justify-content: space-between; background-image: url('https://i.ibb.co/34kbk1n/getbetter.jpg'); background-color: lavender;">
+                <img src="https://i.ibb.co/zNfVY27/sale.png" style="height: 230px;">
+            </div>
+            <nav class="navbar navbar-default">
+                <div class="container text-center">
+                    <div class="navbar-collapse" id="navbar">
+                        <ul class="nav navbar-nav">
+                            <li style="width: 180px;"><a target="_blank" href="https://www.ebay.com/sch/m.html?_nkw=&_armrs=1&_ipg=&_from=&_ssn={{shopName}}&_sop=10">New Arrivals</a></li>
+                            <li style="width: 180px;"><a target="_blank" href="https://www.ebay.com/fdbk/feedback_profile/{{shopName}}">Feedbacks</a></li>
+                            <li style="width: 180px;"><a target="_blank" href="#">Save this seller</a></li>
+                            <li style="width: 180px;"><a target="_blank"
+                                    href="http://contact.ebay.com/ws/eBayISAPI.dll?FindAnswers&amp;frm=284&amp;requested={{shopName}}&amp;iid=-1">Contact</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+
+            <section class="corporate-about white-bg pb-30">
+                <div class="container">
+                    <div class="shop-service">
+                        <div class="service-item">
+                            <div class="single-about">
+                                <div class="block-wrapper3">
+                                    <div class="about-content">
+                                        <h5>FREE SHIPPING</h5>
+                                        <p>On all order</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="single-about">
+                                <div class="block-wrapper">
+                                    <div class="about-content">
+                                        <h5>FAST SHIPPING</h5>
+                                        <p>3 - 5 business day</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="single-about">
+                                <div class="block-wrapper4">
+                                    <div class="about-content">
+                                        <h5>FREE TAX</h5>
+                                        <p>On all order</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="service-item">
+                            <div class="single-about not-border">
+                                <div class="block-wrapper2">
+                                    <div class="about-content">
+                                        <h5>CUSTOMER SUPPORT</h5>
+                                        <p>Excellent Service</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="title"
+                style="width: 95%;margin: 0 auto;padding: 24px 0;text-align: center;color: rgb(192, 145, 0);font-size: 32px;font-weight: 700;">
+                - {{titleProduct}} -
+            </div>
+            <div class="description" style="padding: 10px 2.5%;display: flex;">
+                <div class="d-image"
+                    style="width: 48%;padding: 5px;text-align: center;margin: 0 auto;border: 1px solid rgba(0, 0, 0, .75);border-radius: 5px;">
+                    <img style="max-width: 80%;width: 100%;margin: 0 auto;" src="{{imgMain}}">
+                </div>
+                <div #desElement class="d-desc" style="width: 50%;padding: 5px;">
+                    <h3 style="border-bottom: 1px solid #00467a; margin-top: 0;color: #00467a;">Description </h3>
+                    <ng-container *ngFor="let item of listDescription">
+                        <div class="d-desc-i" style="display: flex;align-items: center;margin-bottom: 10px;"
+                            *ngIf="item != ''">
+                            <img _ngcontent-ycr-c47="" src="https://i.ibb.co/kDJGXVQ/Jenni-Store-2.png"
+                                style="width: 10px; padding-right: 5px;">
+                            <div style="font-size: 15px" [innerHTML]="item"></div>
+                        </div>
+                    </ng-container>
+                </div>
+            </div>
+            <div _ngcontent-ycr-c47="" class="" *ngIf="specifications.length > 0"
+                style="margin: 20px 0; padding: 10px 2.5%; border-top: 1px solid #00467a;margin-bottom: 0; width: 50%;display: inline-block;">
+                <div _ngcontent-ycr-c47="" class="p-title"
+                    style="font-size: 16px; font-weight: 700;margin-bottom: 10px;">Specifications:</div>
+                <div class="desc">
+                    <p *ngFor="let s of specifications">{{s}}</p>
+                </div>
+            </div>
+            <div _ngcontent-ycr-c47="" class=""  *ngIf="packageIncludes.length > 0"
+                style="margin: 20px 0; padding: 10px 2.5%; border-top: 1px solid #00467a;margin-bottom: 0; width: 45%;display: inline-block;vertical-align: top;">
+                <div _ngcontent-ycr-c47="" class="p-title"
+                    style="font-size: 16px; font-weight: 700;margin-bottom: 10px;">Package Included:</div>
+                <div class="desc">
+                    <p *ngFor="let s of packageIncludes">- {{s}}</p>
+                </div>
+            </div>
+            <div _ngcontent-ycr-c47="" class="shipping">
+                <h2>Shipping</h2>
+                <p>- We do not ship to a different address. we will ship to the address you provide on the ebay only.
+                    Please check your address before purchase.</p>
+                <p>- Items are dispatched within 24 hours (except weekends and holidays) and shipped from US.</p>
+                <p>- It should take 3-5 business days for the product to reach your destination (Saturday and Sunday
+                    excluded).</p>
+                <p>- We use a selection of shipping services such as UPS, FedEx, USPS etc.</p>
+                <p>- We ship only to the 48 contiguous states of America. We do not ship to Hawaii, Porto Rico, Alaska,
+                    US Protectorates, APO/FPO addresses and PO Boxes. Local pickups are not offered.</p>
+                <p>- If it takes any longer than that, please do not hesitate to contact us to resolve the issues.</p>
+            </div>
+            <div _ngcontent-ycr-c47="" class="shipping">
+                <h2>Privacy</h2>
+                <p>Your privacy is important to us. Please review our Privacy Policy to learn about what information we
+                    collect, how we use it and how we keep it safe.</p>
+                <p>How do we protect visitor information?</p>
+                <p>We implement a variety of security measures to maintain the safety of your personal information. Your
+                    personal information is contained behind secured networks and is only accessible by a limited number
+                    of persons who have special access rights to such systems, and are required to keep the information
+                    confidential. When you place orders or access your personal information, we offer the use of a
+                    secure server. All sensitive/credit information you supply is transmitted via Secure Socket Layer
+                    (SSL) technology and then encrypted into our databases to be only accessed as stated above.</p>
+            </div>
+        </body>
+
+        </html>
+    </div>
+    <div class="l-errr" *ngIf="errorGet">
+        Không thể get được sản phẩm
+    </div>
+    <div class="l-image">
+        <canvas class="canvas" #canvas></canvas>
+    </div>
+</div>
+
+<div class="overlay" *ngIf="overlayLoad">
+    <div id="loader-wrapper">
+        <div id="loader"></div>
+    </div>
+</div>

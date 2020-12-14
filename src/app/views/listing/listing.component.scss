@@ -1,0 +1,155 @@
+.listing {
+    padding: 1rem;
+    padding-top: calc(60px + 1rem);
+    .l-input {
+        height: 40px;
+        display: flex;
+        align-items: center;
+
+        label {
+            padding-right: 20px;
+        }
+
+        input {
+            height: 30px;
+            min-width: 500px;
+            width: 70%;
+        }
+
+        button {
+            padding: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+    }
+    .canvas {
+        visibility: hidden;
+        opacity: 0;
+        display: none;
+    }
+
+    .l-custom {
+        padding: 1rem 0;
+
+        label {
+            padding-right: 20px;
+        }
+
+        input {
+            height: 25px;
+            min-width: 300px;
+            margin-right: 20px;
+        }
+
+        button {
+            padding: 10px;
+            margin-left: 20px;
+            cursor: pointer;
+        }
+    }
+}
+#loader-wrapper {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1000;
+}
+#loader {
+    display: block;
+    position: relative;
+    left: 50%;
+    top: 50%;
+    width: 150px;
+    height: 150px;
+    margin: -75px 0 0 -75px;
+
+    border: 3px solid #3498db;
+    z-index: 1500;
+}
+#loader:before {
+    content: "";
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    right: 5px;
+    bottom: 5px;
+    border: 3px solid #e74c3c;
+}
+#loader:after {
+    content: "";
+    position: absolute;
+    top: 15px;
+    left: 15px;
+    right: 15px;
+    bottom: 15px;
+    border: 3px solid #f9c922;
+}
+#loader {
+    border: 3px solid transparent;
+    border-top-color: #3498db;
+}
+#loader:before {
+    border: 3px solid transparent;
+    border-top-color: #e74c3c;
+}
+#loader:after {
+    border: 3px solid transparent;
+    border-top-color: #f9c922;
+}
+#loader {
+    border-radius: 50%;
+}
+#loader:before {
+    border-radius: 50%;
+}
+#loader:after {
+    border-radius: 50%;
+}
+/* copy and paste the animation inside all 3 elements */
+/* #loader, #loader:before, #loader:after */
+
+/* include this only once */
+@-webkit-keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+    }
+}
+@keyframes spin {
+    0% {
+        -webkit-transform: rotate(0deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(0deg); /* IE 9 */
+        transform: rotate(0deg); /* Firefox 16+, IE 10+, Opera */
+    }
+    100% {
+        -webkit-transform: rotate(360deg); /* Chrome, Opera 15+, Safari 3.1+ */
+        -ms-transform: rotate(360deg); /* IE 9 */
+        transform: rotate(360deg); /* Firefox 16+, IE 10+, Opera */
+    }
+}
+#loader {
+    -webkit-animation: spin 2s linear infinite;
+    animation: spin 2s linear infinite;
+}
+#loader:before {
+    -webkit-animation: spin 3s linear infinite;
+    animation: spin 3s linear infinite;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 101;
+    background: rgba($color: #000000, $alpha: 0.75);
+}
